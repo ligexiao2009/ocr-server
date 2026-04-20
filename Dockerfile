@@ -24,7 +24,7 @@ RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple && \
 
 # 4. 优化模型下载：
 # 在代码拷贝之前先下载模型，这样改代码不会重新下模型（模型几百MB，下一次很慢）
-RUN python -c "from paddleocr import PaddleOCR; PaddleOCR(lang='ch')"
+#RUN python -c "from paddleocr import PaddleOCR; PaddleOCR(lang='ch')"
 
 # 5. 最后才拷贝代码：
 # 你的业务代码改动最频繁，放在最后，确保前面的层全部命中缓存
