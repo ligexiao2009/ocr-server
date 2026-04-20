@@ -20,8 +20,7 @@ app = FastAPI(title="Stock OCR API")
 # 修改这一行
 ocr = PaddleOCR(
     lang='ch',
-    use_gpu=False,
-    enable_mkldnn=False  # ⭐关键
+    device='cpu'
 )
 # 定义请求参数模型
 class OCRRequest(BaseModel):
