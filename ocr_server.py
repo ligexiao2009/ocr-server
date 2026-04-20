@@ -12,6 +12,11 @@ from paddleocr import PaddleOCR
 
 # 屏蔽无用日志
 logging.getLogger("ppocr").setLevel(logging.ERROR)
+# --- 关键：在 import paddle 之前通过环境变量禁用 oneDNN ---
+os.environ['FLAGS_use_onednn'] = '0'
+os.environ['FLAGS_enable_pir_api'] = '0'
+# 禁用模型源检查，加快启动速度
+os.environ['PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK'] = 'True'
 
 app = FastAPI(title="Stock OCR API")
 
@@ -21,10 +26,7 @@ app = FastAPI(title="Stock OCR API")
 ocr = PaddleOCR(
     lang='ch', 
     device='cpu', 
-    use_angle_cls=True, 
-    use_onnx=False,      # 确保不使用 ONNX 路径（如果有冲突）
-    enable_mkldnn=False, # 重点：强制关闭加速库，解决 ConvertPirAttribute2RuntimeAttribute 报错
-    use_onednn=False     # 显式关闭 oneDNN
+    use_textline_orientation=True  # 替代旧的 use_angle_cls
 )
 # 定义请求参数模型
 class OCRRequest(BaseModel):
