@@ -19,10 +19,9 @@ app = FastAPI(title="Stock OCR API")
 # 放在外面确保模型只加载一次，常驻内存，提升响应速度
 # 修改这一行
 ocr = PaddleOCR(
-    lang='ch',
-    use_angle_cls=True,
-    use_gpu=False,
-    enable_mkldnn=False   # 关键！
+    lang='ch', 
+    device='cpu', 
+    use_textline_orientation=True  # 替代旧的 use_angle_cls
 )
 # 定义请求参数模型
 class OCRRequest(BaseModel):
