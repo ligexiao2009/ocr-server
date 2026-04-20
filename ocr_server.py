@@ -12,11 +12,6 @@ from paddleocr import PaddleOCR
 
 # 屏蔽无用日志
 logging.getLogger("ppocr").setLevel(logging.ERROR)
-# --- 关键：在 import paddle 之前通过环境变量禁用 oneDNN ---
-os.environ['FLAGS_use_onednn'] = '0'
-os.environ['FLAGS_enable_pir_api'] = '0'
-# 禁用模型源检查，加快启动速度
-os.environ['PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK'] = 'True'
 
 app = FastAPI(title="Stock OCR API")
 
