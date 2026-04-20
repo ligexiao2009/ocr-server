@@ -14,8 +14,8 @@ WORKDIR /app
 # 如果你没有 requirements.txt，可以手动写 pip install 命令
 RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install --no-cache-dir \
-    paddlepaddle \
-    paddleocr \
+    paddlepaddle==2.6.2 \
+    paddleocr==2.7.3 \
     opencv-python-headless \
     fastapi \
     uvicorn \
