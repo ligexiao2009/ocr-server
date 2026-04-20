@@ -143,7 +143,7 @@ async def predict(
 
     # --- 后续 OCR 逻辑保持不变 ---
     try:
-        result = ocr.predict(img)
+        result = ocr.ocr(img)
         lines = group_by_line(result)
         funds_data = parse_funds(lines)
         
