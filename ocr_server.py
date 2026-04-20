@@ -17,8 +17,15 @@ app = FastAPI(title="Stock OCR API")
 
 # --- 全局初始化 OCR ---
 # 放在外面确保模型只加载一次，常驻内存，提升响应速度
-ocr = PaddleOCR(lang='ch', device='cpu', use_angle_cls=True)
-
+# 修改这一行
+ocr = PaddleOCR(
+    lang='ch', 
+    device='cpu', 
+    use_angle_cls=True, 
+    use_onnx=False,      # 确保不使用 ONNX 路径（如果有冲突）
+    enable_mkldnn=False, # 重点：强制关闭加速库，解决 ConvertPirAttribute2RuntimeAttribute 报错
+    use_onednn=False     # 显式关闭 oneDNN
+)
 # 定义请求参数模型
 class OCRRequest(BaseModel):
     image_path: str
